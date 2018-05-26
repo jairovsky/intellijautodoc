@@ -1,8 +1,8 @@
 <idea-plugin>
-  <id>com.your.company.unique.plugin.id</id>
-  <name>Plugin display name here</name>
+  <id>io.github.jairovsky.intellijautodoc</id>
+  <name>IntelliJAutodoc</name>
   <version>1.0</version>
-  <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+  <vendor email="jairo.santos2@fatec.sp.gov.br">Jairovsky</vendor>
 
   <description><![CDATA[
       Enter short description for your plugin here.<br>
@@ -29,8 +29,11 @@
   </extensions>
 
   <actions>
-
-    <action text="GenJavadoc" class="GenerateJavadocAction" id="IntelliJAutodoc" description="Generate Javadoc for the class" />
+    <action
+            id="IntelliJAutodoc.GenerateJavadoc"
+            text="Generate Javadoc comments"
+            class="io.github.jairovsky.intellijautodoc.GenerateJavadocAction"
+            description="Generate Javadoc for the current file"/>
   </actions>
 
 </idea-plugin>
