@@ -26,6 +26,10 @@
 
   <extensions defaultExtensionNs="com.intellij">
 
+    <applicationService
+            id="IntelliJAutodoc.MethodNameSplitter"
+            serviceInterface="io.github.jairovsky.intellijautodoc.text.MethodNameSplitter"
+            serviceImplementation="io.github.jairovsky.intellijautodoc.text.CamelCaseSplitter" />
   </extensions>
 
   <actions>
