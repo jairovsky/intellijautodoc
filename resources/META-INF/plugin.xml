@@ -31,10 +31,10 @@
 
   <actions>
     <action
-            id="IntelliJAutodoc.GenerateJavadoc"
-            text="Generate Javadoc comments"
-            class="io.github.jairovsky.intellijautodoc.GenerateJavadocAction"
-            description="Generate Javadoc for the current file"/>
+            id="IntelliJAutodoc.InsertJavadoc"
+            text="Insert javadoc"
+            class="io.github.jairovsky.intellijautodoc.InsertJavadocAction"
+            description="Insert Javadoc comments in the current file"/>
   </actions>
 
 </idea-plugin>

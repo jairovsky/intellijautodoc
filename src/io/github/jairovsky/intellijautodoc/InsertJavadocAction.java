@@ -5,7 +5,7 @@ import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiJavaFile;
 
-public class GenerateJavadocAction extends HideableAction {
+public class InsertJavadocAction extends HideableAction {
 
     @Override
     public void actionPerformed(AnActionEvent event) {
