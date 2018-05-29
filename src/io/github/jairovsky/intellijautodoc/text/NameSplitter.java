@@ -2,7 +2,7 @@ package io.github.jairovsky.intellijautodoc.text;
 
 import java.util.List;
 
-public interface MethodNameSplitter {
+public interface NameSplitter {
 
     List<String> splitWords(String methodName);
 }

@@ -25,7 +25,7 @@
 
     <applicationService
             id="IntelliJAutodoc.MethodNameSplitter"
-            serviceInterface="io.github.jairovsky.intellijautodoc.text.MethodNameSplitter"
+            serviceInterface="io.github.jairovsky.intellijautodoc.text.NameSplitter"
             serviceImplementation="io.github.jairovsky.intellijautodoc.text.CamelCaseSplitter" />
   </extensions>
 

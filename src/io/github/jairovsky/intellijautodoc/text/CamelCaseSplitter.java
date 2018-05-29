@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class CamelCaseSplitter implements MethodNameSplitter {
+public class CamelCaseSplitter implements NameSplitter {
 
     private static final Pattern CAMEL_CASE =
             Pattern.compile("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
