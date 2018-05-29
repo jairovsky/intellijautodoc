@@ -8,7 +8,7 @@ import org.fest.util.Lists;
 import java.util.List;
 
 /**
- * Visits java methodsToWrite that don't have javadoc comments.
+ * Visits java methods that don't have javadoc comments.
  */
 class NoJavadocMethodVisitor extends JavaRecursiveElementWalkingVisitor {
 
