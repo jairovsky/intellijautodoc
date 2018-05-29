@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Visits java methods that don't have javadoc comments.
  */
-class UndocumentedMethodVisitor extends JavaRecursiveElementWalkingVisitor {
+class UndocumentedMethodVisitor extends JavaRecursiveElementWalkingVisitor implements SimpleAction {
 
     private static final Logger logger = Logger.getInstance(UndocumentedMethodVisitor.class);
 
@@ -25,6 +25,8 @@ class UndocumentedMethodVisitor extends JavaRecursiveElementWalkingVisitor {
     @Override
     public void visitMethod(PsiMethod method) {
 
+        super.visitMethod(method);
+
         PsiDocComment comment = method.getDocComment();
 
         if (comment == null) {
@@ -35,6 +37,7 @@ class UndocumentedMethodVisitor extends JavaRecursiveElementWalkingVisitor {
         }
     }
 
+    @Override
     public void execute() {
 
         file.accept(this);
