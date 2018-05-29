@@ -7,6 +7,8 @@ import org.fest.util.Lists;
 
 import java.util.List;
 
+import static java.lang.String.format;
+
 /**
  * Visits java methods that don't have javadoc comments.
  */
@@ -31,7 +33,7 @@ class UndocumentedMethodVisitor extends JavaRecursiveElementWalkingVisitor imple
 
         if (comment == null) {
 
-            logger.debug("adding method {} to list of undocumented methodsToWrite", method.getName());
+            logger.debug(format("adding method %s to list of undocumented methods", method.getName()));
 
             undocumentedMethods.add(method);
         }

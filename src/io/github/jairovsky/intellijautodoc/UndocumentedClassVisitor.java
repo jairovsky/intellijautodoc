@@ -10,6 +10,8 @@ import org.fest.util.Lists;
 
 import java.util.List;
 
+import static java.lang.String.format;
+
 /**
  * Visits java classes that don't have javadoc comments.
  */
@@ -34,7 +36,7 @@ class UndocumentedClassVisitor extends JavaRecursiveElementWalkingVisitor implem
 
         if (comment == null) {
 
-            logger.debug("adding class {} to the list of undocumented classes");
+            logger.debug(format("adding class %s to the list of undocumented classes", clazz.getName()));
 
             undocumentedClasses.add(clazz);
         }
