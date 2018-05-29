@@ -10,14 +10,14 @@ import java.util.List;
 /**
  * Visits java methods that don't have javadoc comments.
  */
-class NoJavadocMethodVisitor extends JavaRecursiveElementWalkingVisitor {
+class UndocumentedMethodVisitor extends JavaRecursiveElementWalkingVisitor {
 
-    private static final Logger logger = Logger.getInstance(NoJavadocMethodVisitor.class);
+    private static final Logger logger = Logger.getInstance(UndocumentedMethodVisitor.class);
 
     private final PsiJavaFile file;
     private final List<PsiMethod> undocumentedMethods;
 
-    NoJavadocMethodVisitor(PsiJavaFile file) {
+    UndocumentedMethodVisitor(PsiJavaFile file) {
         this.file = file;
         this.undocumentedMethods = Lists.newArrayList();
     }

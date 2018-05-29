@@ -13,7 +13,7 @@ public class InsertJavadocAction extends HideableAction {
         PsiJavaFile file = (PsiJavaFile) event.getData(LangDataKeys.PSI_FILE);
 
         if (file != null) {
-            new NoJavadocMethodVisitor(file).execute();
+            new UndocumentedMethodVisitor(file).execute();
         }
     }
 
