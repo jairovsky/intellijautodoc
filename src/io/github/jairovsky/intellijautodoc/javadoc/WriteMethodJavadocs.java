@@ -30,23 +30,20 @@ class WriteMethodJavadocs implements SimpleAction {
     @Override
     public void execute() {
 
-        methodsToWrite.forEach(x -> {
-
-            List<String> words =
-                    nameSplitter.splitWords(x.getName());
-
-            PsiDocComment docComment =
-                    elementFactory.createDocCommentFromText(wrapInJavadocMarkup(joinSentence(words)));
-
-            x.addBefore(docComment, x.getFirstChild());
-
-            codeStyleManager.reformat(x);
-        });
+        methodsToWrite.forEach(this::createDocumentationForMethod);
     }
 
-    private String joinSentence(List<String> words) {
+    private void createDocumentationForMethod(PsiMethod method) {
 
-        return StringUtils.join(words, " ");
+        List<String> words =
+                nameSplitter.splitWords(method.getName());
+
+        PsiDocComment docComment =
+                elementFactory.createDocCommentFromText(wrapInJavadocMarkup(""));
+
+        method.addBefore(docComment, method.getFirstChild());
+
+        codeStyleManager.reformat(method);
     }
 
     private String wrapInJavadocMarkup(String str) {
