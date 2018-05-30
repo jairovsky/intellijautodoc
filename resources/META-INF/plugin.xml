@@ -33,7 +33,7 @@
     <action
             id="IntelliJAutodoc.InsertJavadoc"
             text="Insert javadoc"
-            class="io.github.jairovsky.intellijautodoc.InsertJavadocAction"
+            class="io.github.jairovsky.intellijautodoc.javadoc.InsertJavadocAction"
             description="Insert Javadoc comments in the current file"/>
   </actions>
 

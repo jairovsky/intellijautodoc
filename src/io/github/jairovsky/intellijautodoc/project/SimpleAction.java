@@ -1,9 +1,9 @@
-package io.github.jairovsky.intellijautodoc;
+package io.github.jairovsky.intellijautodoc.project;
 
 /**
  * An action that does not commit writes to the IDE.
  */
-interface SimpleAction {
+public interface SimpleAction {
 
     void execute();
 }

@@ -1,4 +1,4 @@
-package io.github.jairovsky.intellijautodoc;
+package io.github.jairovsky.intellijautodoc.project;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.DumbAwareAction;
@@ -15,5 +15,5 @@ public abstract class HideableAction extends DumbAwareAction {
         e.getPresentation().setVisible(isVisible(e));
     }
 
-    abstract Boolean isVisible(AnActionEvent event);
+    protected abstract Boolean isVisible(AnActionEvent event);
 }

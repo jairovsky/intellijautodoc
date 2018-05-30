@@ -1,11 +1,11 @@
-package io.github.jairovsky.intellijautodoc;
+package io.github.jairovsky.intellijautodoc.javadoc;
 
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.JavaRecursiveElementWalkingVisitor;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiJavaFile;
-import com.intellij.psi.PsiMethod;
 import com.intellij.psi.javadoc.PsiDocComment;
+import io.github.jairovsky.intellijautodoc.project.SimpleAction;
 import org.fest.util.Lists;
 
 import java.util.List;

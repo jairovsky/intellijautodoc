@@ -1,10 +1,11 @@
-package io.github.jairovsky.intellijautodoc;
+package io.github.jairovsky.intellijautodoc.javadoc;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElementFactory;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.javadoc.PsiDocComment;
+import io.github.jairovsky.intellijautodoc.project.SimpleAction;
 import io.github.jairovsky.intellijautodoc.text.sentences.SentenceAssembler;
 import io.github.jairovsky.intellijautodoc.text.sentences.SentenceAssemblerFactory;
 

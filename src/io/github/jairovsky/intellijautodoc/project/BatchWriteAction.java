@@ -1,4 +1,4 @@
-package io.github.jairovsky.intellijautodoc;
+package io.github.jairovsky.intellijautodoc.project;
 
 import com.intellij.openapi.application.Result;
 import com.intellij.openapi.command.WriteCommandAction;
@@ -9,13 +9,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-class BatchWriteAction extends WriteCommandAction {
+public class BatchWriteAction extends WriteCommandAction {
 
-    private static final String ACTION_NAME = "Insert javadocs";
     private final List<SimpleAction> actions;
 
-    public BatchWriteAction(@Nullable Project project, SimpleAction... actions) {
-        super(project, ACTION_NAME);
+    public BatchWriteAction(@Nullable Project project, String name,  SimpleAction... actions) {
+        super(project, name);
         this.actions = Lists.newArrayList(actions);
     }
 
