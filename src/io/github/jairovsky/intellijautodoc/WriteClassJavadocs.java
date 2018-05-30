@@ -1,50 +1,54 @@
 package io.github.jairovsky.intellijautodoc;
 
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElementFactory;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.javadoc.PsiDocComment;
-import io.github.jairovsky.intellijautodoc.text.NameSplitter;
-import org.apache.commons.lang.StringUtils;
+import io.github.jairovsky.intellijautodoc.text.sentences.SentenceAssembler;
+import io.github.jairovsky.intellijautodoc.text.sentences.SentenceAssemblerFactory;
 
 import java.util.List;
+
+import static org.fest.util.Lists.newArrayList;
 
 public class WriteClassJavadocs implements SimpleAction {
 
     private final List<PsiClass> classesToWrite;
-    private final NameSplitter nameSplitter;
     private final PsiElementFactory elementFactory;
     private final CodeStyleManager codeStyleManager;
+    private final SentenceAssembler sentenceAssembler;
 
     public WriteClassJavadocs(Project project, List<PsiClass> classesToWrite) {
         this.classesToWrite = classesToWrite;
-        this.nameSplitter = ServiceManager.getService(NameSplitter.class);
         this.elementFactory = PsiElementFactory.SERVICE.getInstance(project);
         this.codeStyleManager = CodeStyleManager.getInstance(project);
+        this.sentenceAssembler = SentenceAssemblerFactory.newAssembler(SentenceAssembler.Type.CLASS);
     }
 
     @Override
     public void execute() {
 
-        classesToWrite.forEach(x -> {
-
-            List<String> words =
-                    nameSplitter.splitWords(x.getName());
-
-            PsiDocComment docComment =
-                    elementFactory.createDocCommentFromText(wrapInJavadocMarkup(joinSentence(words)));
-
-            x.addBefore(docComment, x.getFirstChild());
-
-            codeStyleManager.reformat(x);
-        });
+        classesToWrite.forEach(this::createDocumentationForClass);
     }
 
-    private String joinSentence(List<String> words) {
+    private void createDocumentationForClass(PsiClass clazz) {
 
-        return StringUtils.join(words, " ");
+        List<String> words =
+                newArrayList(clazz.getName());
+
+        String sentence =
+                sentenceAssembler.assembleSentence(words);
+
+        String javadocMarkup =
+                wrapInJavadocMarkup(sentence);
+
+        PsiDocComment docComment =
+                elementFactory.createDocCommentFromText(javadocMarkup);
+
+        clazz.addBefore(docComment, clazz.getFirstChild());
+
+        codeStyleManager.reformat(clazz);
     }
 
     private String wrapInJavadocMarkup(String str) {
