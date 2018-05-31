@@ -9,6 +9,10 @@ public class SentenceAssemblerForMethods implements SentenceAssembler {
     @Override
     public String assembleSentence(List<String> words) {
 
+        if (words == null || words.size() == 0) {
+            throw new IllegalArgumentException("Empty list of words");
+        }
+
         List<String> lowercasedWords =
                 lowercaseListOfWords(words);
 
@@ -18,12 +22,17 @@ public class SentenceAssemblerForMethods implements SentenceAssembler {
         String capitalized =
                 capitalizeFirstChar(joined);
 
-        return joined;
+        String punctuated =
+                punctuateSentence(capitalized);
+
+        return punctuated;
     }
 
-    private String capitalizeFirstChar(String str) {
+    private List<String> lowercaseListOfWords(List<String> words) {
 
-
+        return words.stream()
+                .map(String::toLowerCase)
+                .collect(Collectors.toList());
     }
 
     private String joinWordsWithSpaces(List<String> words) {
@@ -35,10 +44,16 @@ public class SentenceAssemblerForMethods implements SentenceAssembler {
         return joiner.toString();
     }
 
-    private List<String> lowercaseListOfWords(List<String> words) {
+    private String capitalizeFirstChar(String str) {
 
-        return words.stream()
-                .map(String::toLowerCase)
-                .collect(Collectors.toList());
+        char[] chars = str.toCharArray();
+        chars[0] = Character.toUpperCase(chars[0]);
+
+        return String.valueOf(chars);
+    }
+
+    private String punctuateSentence(String capitalized) {
+
+        return capitalized + ".";
     }
 }

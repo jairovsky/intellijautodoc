@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -26,5 +27,21 @@ public class SentenceAssemblerForMethodsTest {
         String sentence = assembler.assembleSentence(words);
 
         assertEquals("Set full name.", sentence);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void assembleSentence_givenEmptyList_shouldThrowException() {
+
+        List<String> l = null;
+
+        assembler.assembleSentence(l);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void assembleSentence_givenEmptyList_shouldThrowException_2() {
+
+        List<String> l = Lists.newArrayList();
+
+        assembler.assembleSentence(l);
     }
 }

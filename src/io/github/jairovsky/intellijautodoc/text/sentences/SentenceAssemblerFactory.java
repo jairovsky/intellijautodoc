@@ -7,6 +7,8 @@ public class SentenceAssemblerFactory {
         switch (type) {
             case CLASS:
                 return new SentenceAssemblerForClasses();
+            case METHOD:
+                return new SentenceAssemblerForMethods();
             default:
                 throw new IllegalArgumentException("Invalid type");
         }
