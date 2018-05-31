@@ -18,13 +18,11 @@ public class WriteClassJavadocs implements SimpleAction {
     private final List<PsiClass> classesToWrite;
     private final PsiElementFactory elementFactory;
     private final CodeStyleManager codeStyleManager;
-    private final SentenceAssembler sentenceAssembler;
 
     public WriteClassJavadocs(Project project, List<PsiClass> classesToWrite) {
         this.classesToWrite = classesToWrite;
         this.elementFactory = PsiElementFactory.SERVICE.getInstance(project);
         this.codeStyleManager = CodeStyleManager.getInstance(project);
-        this.sentenceAssembler = SentenceAssemblerFactory.newAssembler(SentenceAssembler.Type.CLASS);
     }
 
     @Override
@@ -37,6 +35,9 @@ public class WriteClassJavadocs implements SimpleAction {
 
         List<String> words =
                 newArrayList(clazz.getName());
+
+        SentenceAssembler sentenceAssembler =
+                SentenceAssemblerFactory.newAssembler(clazz);
 
         String sentence =
                 sentenceAssembler.assembleSentence(words);
