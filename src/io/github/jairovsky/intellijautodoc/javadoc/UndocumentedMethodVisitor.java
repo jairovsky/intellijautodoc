@@ -3,7 +3,7 @@ package io.github.jairovsky.intellijautodoc.javadoc;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.*;
 import com.intellij.psi.javadoc.PsiDocComment;
-import io.github.jairovsky.intellijautodoc.project.SimpleAction;
+import io.github.jairovsky.intellijautodoc.action.SimpleAction;
 import org.fest.util.Lists;
 
 import java.util.List;

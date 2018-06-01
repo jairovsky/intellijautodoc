@@ -1,4 +1,4 @@
-package io.github.jairovsky.intellijautodoc.project;
+package io.github.jairovsky.intellijautodoc.action;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.DumbAwareAction;

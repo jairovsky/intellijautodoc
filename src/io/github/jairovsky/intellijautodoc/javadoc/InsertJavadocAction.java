@@ -5,8 +5,8 @@ import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.editor.Caret;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiJavaFile;
-import io.github.jairovsky.intellijautodoc.project.BatchWriteAction;
-import io.github.jairovsky.intellijautodoc.project.HideableAction;
+import io.github.jairovsky.intellijautodoc.action.BatchWriteAction;
+import io.github.jairovsky.intellijautodoc.action.HideableAction;
 
 public class InsertJavadocAction extends HideableAction {
 

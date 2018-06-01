@@ -6,11 +6,10 @@ import com.intellij.psi.PsiElementFactory;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.javadoc.PsiDocComment;
-import io.github.jairovsky.intellijautodoc.project.SimpleAction;
+import io.github.jairovsky.intellijautodoc.action.SimpleAction;
 import io.github.jairovsky.intellijautodoc.text.NameSplitter;
 import io.github.jairovsky.intellijautodoc.text.sentences.SentenceAssembler;
 import io.github.jairovsky.intellijautodoc.text.sentences.SentenceAssemblerFactory;
-import org.apache.commons.lang.StringUtils;
 
 import java.util.List;
 

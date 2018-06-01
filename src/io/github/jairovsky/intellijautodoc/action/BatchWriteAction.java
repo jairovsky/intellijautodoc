@@ -1,4 +1,4 @@
-package io.github.jairovsky.intellijautodoc.project;
+package io.github.jairovsky.intellijautodoc.action;
 
 import com.intellij.openapi.application.Result;
 import com.intellij.openapi.command.WriteCommandAction;

@@ -1,4 +1,4 @@
-package io.github.jairovsky.intellijautodoc.project;
+package io.github.jairovsky.intellijautodoc.action;
 
 /**
  * An action that does not commit writes to the IDE.

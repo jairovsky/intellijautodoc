@@ -5,7 +5,7 @@ import com.intellij.psi.JavaRecursiveElementWalkingVisitor;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiJavaFile;
 import com.intellij.psi.javadoc.PsiDocComment;
-import io.github.jairovsky.intellijautodoc.project.SimpleAction;
+import io.github.jairovsky.intellijautodoc.action.SimpleAction;
 import org.fest.util.Lists;
 
 import java.util.List;
