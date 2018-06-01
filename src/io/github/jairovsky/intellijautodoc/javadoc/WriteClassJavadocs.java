@@ -1,5 +1,6 @@
 package io.github.jairovsky.intellijautodoc.javadoc;
 
+import com.intellij.lang.ASTNode;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElementFactory;
@@ -11,7 +12,7 @@ import io.github.jairovsky.intellijautodoc.text.sentences.SentenceAssemblerFacto
 
 import java.util.List;
 
-import static org.fest.util.Lists.newArrayList;
+import static com.google.common.collect.Lists.newArrayList;
 
 public class WriteClassJavadocs implements SimpleAction {
 
@@ -48,12 +49,20 @@ public class WriteClassJavadocs implements SimpleAction {
         PsiDocComment docComment =
                 elementFactory.createDocCommentFromText(javadocMarkup);
 
-        clazz.addBefore(docComment, clazz.getFirstChild());
+        insertComment(clazz, docComment);
 
         codeStyleManager.reformat(clazz);
     }
 
     private String wrapInJavadocMarkup(String str) {
         return String.format("/**%s*/", str);
+    }
+
+    private void insertComment(PsiClass clazz, PsiDocComment docComment) {
+
+        ASTNode positionBeforeClassDeclaration = clazz.getFirstChild().getNode();
+        ASTNode comment = docComment.getNode();
+
+        clazz.getNode().addChild(comment, positionBeforeClassDeclaration);
     }
 }
