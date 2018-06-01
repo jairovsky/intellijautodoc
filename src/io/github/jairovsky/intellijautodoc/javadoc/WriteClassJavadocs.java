@@ -1,12 +1,16 @@
 package io.github.jairovsky.intellijautodoc.javadoc;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElementFactory;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.javadoc.PsiDocComment;
 import io.github.jairovsky.intellijautodoc.action.SimpleAction;
+import io.github.jairovsky.intellijautodoc.project.ProjectVersionDetector;
+import io.github.jairovsky.intellijautodoc.project.ProjectVersionDetectorFactory;
+import io.github.jairovsky.intellijautodoc.project.roots.ModuleRootManager;
 import io.github.jairovsky.intellijautodoc.text.sentences.SentenceAssembler;
 import io.github.jairovsky.intellijautodoc.text.sentences.SentenceAssemblerFactory;
 
@@ -16,11 +20,13 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class WriteClassJavadocs implements SimpleAction {
 
+    private final Project project;
     private final List<PsiClass> classesToWrite;
     private final PsiElementFactory elementFactory;
     private final CodeStyleManager codeStyleManager;
 
     public WriteClassJavadocs(Project project, List<PsiClass> classesToWrite) {
+        this.project = project;
         this.classesToWrite = classesToWrite;
         this.elementFactory = PsiElementFactory.SERVICE.getInstance(project);
         this.codeStyleManager = CodeStyleManager.getInstance(project);
@@ -42,6 +48,17 @@ public class WriteClassJavadocs implements SimpleAction {
 
         String sentence =
                 sentenceAssembler.assembleSentence(words);
+
+        ProjectVersionDetector projectVersionDetector =
+                ProjectVersionDetectorFactory.newDetector(project);
+
+        String projectVersion =
+                projectVersionDetector.getProjectVersion(ModuleRootManager.findCurrentModuleRoot(project));
+
+        if (projectVersion != null) {
+            sentence += "\n @version " + projectVersion;
+            sentence += "\n @since " + projectVersion;
+        }
 
         String javadocMarkup =
                 wrapInJavadocMarkup(sentence);
