@@ -32,6 +32,15 @@ public class SentenceAssemblerFactory {
             return new SentenceAssemblerForInterfaces();
         }
 
+        if (elem.isEnum()) {
+            return new SentenceAssemblerForEnums();
+        }
+
+        if (elem.isAnnotationType()) {
+            return new SentenceAssemblerForAnnotations();
+        }
+
         return new SentenceAssemblerForClasses();
     }
+
 }
