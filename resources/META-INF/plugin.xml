@@ -34,7 +34,8 @@
             id="IntelliJAutodoc.InsertJavadoc"
             text="Insert javadoc"
             class="io.github.jairovsky.intellijautodoc.javadoc.InsertJavadocAction"
-            description="Insert Javadoc comments in the current file"/>
+            description="Insert Javadoc comments in the current file"
+            icon="IntelliJAutodocIcons.INSERT_JAVADOC"/>
   </actions>
 
 </idea-plugin>
