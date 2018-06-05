@@ -4,6 +4,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.JavaRecursiveElementWalkingVisitor;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiJavaFile;
+import com.intellij.psi.PsiTypeParameter;
 import com.intellij.psi.javadoc.PsiDocComment;
 import io.github.jairovsky.intellijautodoc.action.SimpleAction;
 import org.fest.util.Lists;
@@ -34,12 +35,17 @@ class UndocumentedClassVisitor extends JavaRecursiveElementWalkingVisitor implem
 
         PsiDocComment comment = clazz.getDocComment();
 
-        if (comment == null) {
+        if (comment == null && isNotATypeParameter(clazz)) {
 
             logger.debug(format("adding class %s to the list of undocumented classes", clazz.getName()));
 
             undocumentedClasses.add(clazz);
         }
+    }
+
+    private Boolean isNotATypeParameter(PsiClass clazz) {
+
+        return !PsiTypeParameter.class.isAssignableFrom(clazz.getClass());
     }
 
     @Override
