@@ -1,8 +1,8 @@
 package io.github.jairovsky.intellijautodoc.javadoc;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElementFactory;
 import com.intellij.psi.codeStyle.CodeStyleManager;
@@ -40,35 +40,56 @@ public class WriteClassJavadocs implements SimpleAction {
 
     private void createDocumentationForClass(PsiClass clazz) {
 
+        String sentence =
+            createMainSentenceForJavadoc(clazz);
+
+        String sentencePlusJavadocVersionTag =
+            addProjectVersionTagToSentence(sentence);
+
+        insertJavadocIntoTheClassStructure(clazz, sentencePlusJavadocVersionTag);
+
+        codeStyleManager.reformat(clazz);
+    }
+
+    private String createMainSentenceForJavadoc(PsiClass clazz) {
+
         List<String> words =
-                newArrayList(clazz.getName());
+            newArrayList(clazz.getName());
 
         SentenceAssembler sentenceAssembler =
-                SentenceAssemblerFactory.newAssembler(clazz);
+            SentenceAssemblerFactory.newAssembler(clazz);
 
-        String sentence =
-                sentenceAssembler.assembleSentence(words);
+        return sentenceAssembler.assembleSentence(words);
+    }
+
+    private String addProjectVersionTagToSentence(String sentence) {
 
         ProjectVersionDetector projectVersionDetector =
                 ProjectVersionDetectorFactory.newDetector(project);
 
+        VirtualFile contentRoot =
+            ModuleRootManager.findCurrentModuleRoot(project);
+
         String projectVersion =
-                projectVersionDetector.getProjectVersion(ModuleRootManager.findCurrentModuleRoot(project));
+                projectVersionDetector.getProjectVersion(contentRoot);
 
         if (projectVersion != null) {
             sentence += "\n @version " + projectVersion;
             sentence += "\n @since " + projectVersion;
         }
 
+        return sentence;
+    }
+
+    private void insertJavadocIntoTheClassStructure(PsiClass clazz, String sentence) {
+
         String javadocMarkup =
-                wrapInJavadocMarkup(sentence);
+            wrapInJavadocMarkup(sentence);
 
         PsiDocComment docComment =
-                elementFactory.createDocCommentFromText(javadocMarkup);
+            elementFactory.createDocCommentFromText(javadocMarkup);
 
         insertComment(clazz, docComment);
-
-        codeStyleManager.reformat(clazz);
     }
 
     private String wrapInJavadocMarkup(String str) {
