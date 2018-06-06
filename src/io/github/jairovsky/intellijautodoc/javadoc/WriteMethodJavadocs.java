@@ -4,12 +4,14 @@ import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElementFactory;
 import com.intellij.psi.PsiMethod;
+import com.intellij.psi.PsiParameter;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.javadoc.PsiDocComment;
 import io.github.jairovsky.intellijautodoc.action.SimpleAction;
 import io.github.jairovsky.intellijautodoc.text.NameSplitter;
 import io.github.jairovsky.intellijautodoc.text.sentences.SentenceAssembler;
 import io.github.jairovsky.intellijautodoc.text.sentences.SentenceAssemblerFactory;
+import org.fest.util.Lists;
 
 import java.util.List;
 
@@ -43,6 +45,14 @@ class WriteMethodJavadocs implements SimpleAction {
 
         String sentence =
                 sentenceAssembler.assembleSentence(words);
+
+        for (PsiParameter param: method.getParameterList().getParameters()) {
+            sentence += String.format("\n@param %s - the %s", param.getName(), sentenceAssembler.assembleSentence(nameSplitter.splitWords(param.getName())));
+        }
+
+        if (!method.getReturnType().equalsToText("void")) {
+            sentence += String.format("\n@return the %s", method.getReturnType().getPresentableText());
+        }
 
         String javadocMarkup =
                 wrapInJavadocMarkup(sentence);
